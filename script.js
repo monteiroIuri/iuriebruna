@@ -30,3 +30,30 @@ copyBtn.addEventListener('click', async () => {
         copyMsg.textContent = '';
     }, 4000);
 });
+
+document.querySelectorAll('.pix-list-copy button').forEach(button => {
+
+    button.addEventListener('click', async () => {
+
+        const input = button.previousElementSibling;
+        const msg = button.parentElement.nextElementSibling;
+
+        try {
+            await navigator.clipboard.writeText(input.value);
+
+            msg.textContent = 'Copiado! Agora é só colar no seu app do banco 💸';
+
+        } catch (err) {
+
+            input.select();
+
+            msg.textContent = 'Selecionamos o código pra você, agora copie com Ctrl+C 😉';
+        }
+
+        setTimeout(() => {
+            msg.textContent = '';
+        }, 4000);
+
+    });
+
+});
